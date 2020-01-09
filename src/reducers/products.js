@@ -1,30 +1,38 @@
+import * as Types from "./../contans/ActionTypes";
 
+let initialState = [];
 
-let initialState = [
-    {
-        id: 1,
-        name: 'Mango',
-        price: 3,
-        status: true,
-    },
-    {
-        id: 2,
-        name: 'Apple',
-        price: 5,
-        status: false,
-    },
-    {
-        id: 3,
-        name: 'Orange',
-        price: 1,
-        status: true,
+let findIndex = (products, id) => {
+  let result = -1;
+  products.forEach((product, index) => {
+    if (product.id === id) {
+      result = index;
     }
-];
+  });
+  return result;
+};
 
 const products = (state = initialState, action) => {
-    switch(action.type){
-        default: return [...state];
-    }
-}
+  let index = -1;
+  let { id,product } = action;
+  switch (action.type) {
+    case Types.FETCH_PRODUCTS:
+      state = action.products;
+      return [...state];
+    case Types.DELETE_PRODUCT:
+      index = findIndex(state, id);
+      state.splice(index, 1);
+      return [...state];
+    case Types.ADD_PRODUCT:
+      state.push(action.product);
+      return [...state];
+    case Types.UPDATE_PRODUCT:
+      index = findIndex(state,product)
+      state[index] = product 
+      return [...state];
+    default:
+      return [...state];
+  }
+};
 
-export default products
+export default products;

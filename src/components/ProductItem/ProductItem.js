@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 class ProductItem extends Component {
-
   onDelete = id => {
-    if(confirm('Ban chac chan muon xoa san pham nay?')){ //eslint-disable-line
+    if (confirm("Ban chac chan muon xoa san pham nay?")) {   //eslint-disable-line
       this.props.onDelete(id);
     }
-  }
+  };
   render() {
     let { product, index } = this.props;
     let statusName = product.status ? "Con Hang" : "Het Hang";
